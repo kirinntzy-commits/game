@@ -723,7 +723,6 @@ if(window._db) boot(); else window.addEventListener('fb-ready', boot);
 function boot(){
   const isPhone = new URLSearchParams(location.search).get('join') === 'true';
   if(isPhone){
-    // On phone, skip splash immediately
     const splash = document.getElementById('splashScreen');
     if(splash) splash.parentNode.removeChild(splash);
     document.getElementById('mainScreen').style.display = 'none';
@@ -735,17 +734,20 @@ function boot(){
   }
 }
 
+// ===== ТҮЗЕТІЛГЕН CATS МАССИВІ =====
 const CATS = [
-  // Бұрынғы "Білім" (bilim) бөлімі толығымен алынып тасталды
   {
-    id:'cifr', icon:'computer', iconColor:'#60a5fa', name:'Цифрландыру', color:'cat-1',
-    subs:[
-      {
-          {pts:10, q:'Ctrl + Z перне тіркесімі қандай қызмет атқарады?', opts:['А) Соңғы жасалған әрекетті болдырмау және алдыңғы күйге қайтару қызметі','Б) Таңдалған мәтінді автоматты түрде сақтау функциясын іске қосады','В) Құжаттағы барлық мәтінді белгілеу және көшіру әрекетін орындайды','Г) Құжатты басып шығару терезесін жылдам ашу қызметін атқарады'], ok:0, law:'Ctrl + Z — соңғы орындалған әрекетті болдырмау (Undo) пернелер тіркесімі.'},
-          {pts:20, q:'Интернеттегі «cookie» файлдарының негізгі қызметі қандай?', opts:['А) Компьютердің жедел жадын тазарту және жүйені жылдамдату қызметі','Б) Интернетке қосылу жылдамдығын тұрақтандыруға арналған жүйе','В) Вирустардан қорғауға арналған қауіпсіздік бағдарламасының бөлігі','Г) Пайдаланушы әрекеттерін есте сақтап, сайт тәжірибесін бейімдеу механизмі'], ok:3, law:'Cookie файлдары — браузер арқылы пайдаланушының деректерін (логин, баптаулар) уақытша сақтайтын шағын файлдар.'},
-          {pts:30, q:'Неліктен пернетақтадағы әріптер әліпби ретімен орналаспаған?', opts:['А) Компьютерлік кодтау жүйесіне сәйкестендіру мақсатында өзгертілген','Б) Әр тілге бейімдеу процесін жеңілдету үшін орналастырылған','В) Жиі қолданылатын әріптерді тез теру үшін механикалық тығындарды азайту','Г) Пернетақта өндірісін арзандату мақсатында өзгертілген'], ok:2, law:'QWERTY пернетақтасы 1873 жылы жасалған — жиі пайдаланылатын әріптерді алшақ орналастырып, механикалық тығындарды азайту үшін.'},
-          {pts:40, q:'Блокчейн технологиясының негізгі артықшылығы не?', opts:['А) Деректердің ашықтығы мен өзгертілмейтіндігі','Б) Жылдам интернет','В) Арзан баға','Г) Қарапайым интерфейс'], ok:0, law:'Блокчейн — деректер блоктарын тізбекке біріктіретін, өзгертуге болмайтын таратылған тізілім технологиясы.'},
-      }
+    id:'cifr', 
+    icon:'computer', 
+    iconColor:'#60a5fa', 
+    name:'Цифрландыру', 
+    color:'cat-1',
+    // Тікелей сұрақтар (subs жоқ)
+    qs:[
+      {pts:10, q:'Ctrl + Z перне тіркесімі қандай қызмет атқарады?', opts:['А) Соңғы жасалған әрекетті болдырмау және алдыңғы күйге қайтару қызметі','Б) Таңдалған мәтінді автоматты түрде сақтау функциясын іске қосады','В) Құжаттағы барлық мәтінді белгілеу және көшіру әрекетін орындайды','Г) Құжатты басып шығару терезесін жылдам ашу қызметін атқарады'], ok:0, law:'Ctrl + Z — соңғы орындалған әрекетті болдырмау (Undo) пернелер тіркесімі.'},
+      {pts:20, q:'Интернеттегі «cookie» файлдарының негізгі қызметі қандай?', opts:['А) Компьютердің жедел жадын тазарту және жүйені жылдамдату қызметі','Б) Интернетке қосылу жылдамдығын тұрақтандыруға арналған жүйе','В) Вирустардан қорғауға арналған қауіпсіздік бағдарламасының бөлігі','Г) Пайдаланушы әрекеттерін есте сақтап, сайт тәжірибесін бейімдеу механизмі'], ok:3, law:'Cookie файлдары — браузер арқылы пайдаланушының деректерін (логин, баптаулар) уақытша сақтайтын шағын файлдар.'},
+      {pts:30, q:'Неліктен пернетақтадағы әріптер әліпби ретімен орналаспаған?', opts:['А) Компьютерлік кодтау жүйесіне сәйкестендіру мақсатында өзгертілген','Б) Әр тілге бейімдеу процесін жеңілдету үшін орналастырылған','В) Жиі қолданылатын әріптерді тез теру үшін механикалық тығындарды азайту','Г) Пернетақта өндірісін арзандату мақсатында өзгертілген'], ok:2, law:'QWERTY пернетақтасы 1873 жылы жасалған — жиі пайдаланылатын әріптерді алшақ орналастырып, механикалық тығындарды азайту үшін.'},
+      {pts:40, q:'Блокчейн технологиясының негізгі артықшылығы не?', opts:['А) Деректердің ашықтығы мен өзгертілмейтіндігі','Б) Жылдам интернет','В) Арзан баға','Г) Қарапайым интерфейс'], ok:0, law:'Блокчейн — деректер блоктарын тізбекке біріктіретін, өзгертуге болмайтын таратылған тізілім технологиясы.'},
     ]
   },
   {
@@ -815,9 +817,17 @@ const CATS = [
 ];
 
 const ALL_QUESTIONS = [];
-CATS.forEach(cat => cat.subs.forEach(sub => sub.qs.forEach(q => {
-  ALL_QUESTIONS.push({...q, catId:cat.id, subId:sub.id, catName:cat.name, subName:sub.name});
-})));
+CATS.forEach(cat => {
+  if (cat.qs) {
+    cat.qs.forEach(q => {
+      ALL_QUESTIONS.push({...q, catId:cat.id, subId:'direct', catName:cat.name, subName:cat.name});
+    });
+  } else {
+    cat.subs.forEach(sub => sub.qs.forEach(q => {
+      ALL_QUESTIONS.push({...q, catId:cat.id, subId:sub.id, catName:cat.name, subName:sub.name});
+    }));
+  }
+});
 
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const $ = id => document.getElementById(id);
@@ -1039,9 +1049,15 @@ function runGame(teamList){
 
   function renderCats(){
     boardCats.innerHTML = CATS.map((cat,ci)=>{
-      const totalQ = cat.subs.reduce((a,s)=>a+s.qs.length,0);
-      const usedQ  = cat.subs.reduce((a,s)=>a+s.qs.filter(q=>used[cat.id+s.id+q.pts]).length,0);
-      const pct    = Math.round(usedQ/totalQ*100);
+      let totalQ = 0, usedQ = 0;
+      if (cat.qs) {
+        totalQ = cat.qs.length;
+        usedQ = cat.qs.filter(q => used[cat.id + q.pts]).length;
+      } else {
+        totalQ = cat.subs.reduce((a,s)=>a+s.qs.length,0);
+        usedQ = cat.subs.reduce((a,s)=>a+s.qs.filter(q=>used[cat.id+s.id+q.pts]).length,0);
+      }
+      const pct = totalQ ? Math.round(usedQ/totalQ*100) : 0;
       return `
         <div class="cat-card ${cat.color}" onclick="selectCat(${ci})">
           <div class="cat-card-inner">
@@ -1049,7 +1065,7 @@ function runGame(teamList){
               <i class="ms" style="color:${cat.iconColor}">${cat.icon}</i>
             </div>
             <div class="cat-title-text">${cat.name}</div>
-            <div class="cat-sub-count">${cat.subs.length} бөлім • ${usedQ}/${totalQ}</div>
+            <div class="cat-sub-count">${cat.qs ? 'Сұрақтар' : cat.subs.length+' бөлім'} • ${usedQ}/${totalQ}</div>
           </div>
           <div class="cat-progress">
             <div class="cat-progress-bar" style="width:${pct}%"></div>
@@ -1060,19 +1076,86 @@ function runGame(teamList){
     updateTeamDisplay();
   }
 
+  // ТҮЗЕТІЛГЕН selectCat функциясы
   window.selectCat = (ci)=>{
-    SND.click(); curCatIdx = ci;
+    SND.click(); 
+    curCatIdx = ci;
     const cat = CATS[ci];
-    $('subEmoji').innerHTML = `<i class="ms-sm" style="color:${cat.iconColor}">${cat.icon}</i>`;
-    $('subTitle').textContent  = cat.name;
-    renderSubcats(ci);
-    showSubs();
+    
+    // Егер cat-та qs болса (тікелей сұрақтар)
+    if (cat.qs) {
+      // Тікелей сұрақтарды көрсету
+      $('qlistTitle').innerHTML = `<i class="ms-sm" style="color:${cat.iconColor}">${cat.icon}</i> ${cat.name}`;
+      
+      // Сұрақ карточкаларын көрсету
+      $('qCardsRow').innerHTML = cat.qs.map((q, idx)=>{
+        const k = cat.id + q.pts;
+        const done = !!used[k];
+        return `
+          <div class="q-card ${done?'q-used':'q-free'}" ${done?'':` onclick="openDirectQ('${cat.id}', ${idx})"`}>
+            <span class="q-status">${done?'✅':'❓'}</span>
+            <span class="q-pts">${q.pts}</span>
+            <span class="q-pts-label">балл</span>
+          </div>`;
+      }).join('');
+      
+      showQs();
+    } else {
+      // Подкатегориялары бар бөлімдер үшін (Заң, Ойлан-тап)
+      $('subEmoji').innerHTML = `<i class="ms-sm" style="color:${cat.iconColor}">${cat.icon}</i>`;
+      $('subTitle').textContent  = cat.name;
+      renderSubcats(ci);
+      showSubs();
+    }
+  };
+
+  // Тікелей сұрақ ашу функциясы
+  window.openDirectQ = (catId, qi)=>{
+    if(modalOn) return;
+    const cat = CATS.find(c=>c.id === catId);
+    const q = cat.qs[qi];
+    const key = catId + q.pts;
+    if(used[key]) return;
+    curQ = {catId, qi, key, q, isDirect: true};
+
+    $('qmCat').innerHTML = `<i class="ms-sm" style="color:${cat.iconColor}">${cat.icon}</i> ${cat.name} · <strong>${q.pts} балл</strong>`;
+    $('qBody').innerHTML = q.q;
+    $('lawBox').innerHTML = q.law;
+    $('lawBox').classList.remove('on');
+    $('lawBtn').innerHTML = '📖 Жауабы';
+    $('ff50Btn').classList.remove('off');
+    ff50done=false; answered=false;
+
+    const old = document.getElementById('timeoutBanner');
+    if(old) old.remove();
+
+    $('answersGrid').style.display = 'grid';
+    $('answersGrid').innerHTML = q.opts.map((o,i)=>`
+      <button class="ans" data-i="${i}">
+        <span class="ans-prefix">${['А','Б','В','Г'][i]}</span>
+        ${esc(o.replace(/^[АБВГ]\) /,''))}
+      </button>
+    `).join('');
+    document.querySelectorAll('.ans').forEach(b=>b.onclick=onAns);
+
+    timeLeft = 25; timerStarted=false;
+    clearInterval(timerInt);
+    const tb = $('timerBox');
+    tb.textContent='⏱ Уақыт';
+    tb.className='timer-start-btn';
+    tb.disabled=false;
+    tb.onclick = startQuestionTimer;
+
+    $('qOverlay').classList.add('on'); modalOn=true;
+    SND.questionOpenChime();
+    setTimeout(()=>SND.startTicking(), 350);
   };
 
   $('backToCats').onclick = ()=>{ showCats(); renderCats(); };
 
   function renderSubcats(ci){
     const cat = CATS[ci];
+    if (!cat.subs) return;
     $('subGrid').innerHTML = cat.subs.map((sub,si)=>{
       const total = sub.qs.length;
       const done  = sub.qs.filter(q=>used[cat.id+sub.id+q.pts]).length;
@@ -1329,10 +1412,28 @@ function runGame(teamList){
     const ban = document.getElementById('timeoutBanner');
     if(ban) ban.remove();
 
-    const totalQ = CATS.reduce((a,c)=>a+c.subs.reduce((b,s)=>b+s.qs.length,0),0);
+    const totalQ = CATS.reduce((a,c)=> {
+      if (c.qs) return a + c.qs.length;
+      else return a + c.subs.reduce((b,s)=>b+s.qs.length,0);
+    }, 0);
     if(Object.keys(used).length >= totalQ){ showFinish(); return; }
 
-    if(curCatIdx !== null && curSubIdx !== null){
+    if(curCatIdx !== null && CATS[curCatIdx].qs) {
+      // Тікелей сұрақтар бөліміне қайту
+      const cat = CATS[curCatIdx];
+      $('qlistTitle').innerHTML = `<i class="ms-sm" style="color:${cat.iconColor}">${cat.icon}</i> ${cat.name}`;
+      $('qCardsRow').innerHTML = cat.qs.map((q, idx)=>{
+        const k = cat.id + q.pts;
+        const done = !!used[k];
+        return `
+          <div class="q-card ${done?'q-used':'q-free'}" ${done?'':` onclick="openDirectQ('${cat.id}', ${idx})"`}>
+            <span class="q-status">${done?'✅':'❓'}</span>
+            <span class="q-pts">${q.pts}</span>
+            <span class="q-pts-label">балл</span>
+          </div>`;
+      }).join('');
+      showQs();
+    } else if(curCatIdx !== null && curSubIdx !== null){
       renderQCards(curCatIdx, curSubIdx);
       showQs();
     } else {
